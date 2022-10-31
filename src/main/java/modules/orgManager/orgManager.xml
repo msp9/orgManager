@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="Org Manager" prototype="true" name="orgManager" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+    <homeRef>list</homeRef>
+    <homeDocument>NewDocument</homeDocument>
+    <documents>
+        <document ref="NewDocument"/>
+        <document ref="Office"/>
+    </documents>
+    <roles>
+        <role name="Viewer">
+            <description><![CDATA[Enough privileges to view Org Manager documents.]]></description>
+            <privileges>
+                <document name="NewDocument" permission="_R__C"/>
+                <document name="Office" permission="_R__C"/>
+            </privileges>
+            <accesses/>
+        </role>
+        <role name="Maintainer">
+            <description><![CDATA[Enough privileges to create and edit Org Manager documents.]]></description>
+            <privileges>
+                <document name="NewDocument" permission="CRUDC"/>
+                <document name="Office" permission="CRUDC"/>
+            </privileges>
+            <accesses/>
+        </role>
+    </roles>
+    <menu>
+        <list document="NewDocument" name="New Documents">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+        <list document="Office" name="Offices">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </list>
+    </menu>
+</module>
