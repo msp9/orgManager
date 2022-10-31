@@ -35,7 +35,8 @@
 		<property name="bizFlagComment" length="1024" />
 		<property name="bizDataGroupId" length="36" />
 		<property name="bizUserId" length="36" not-null="true" />
-		<property name="streetAddress" length="200" />
+		<property name="streetAddress1" length="200" />
+		<property name="streetAddress2" length="200" />
 		<property name="levelUnit" length="200" />
 		<property name="buildingName" length="200" />
 		<property name="postcode" length="4" />

@@ -4,10 +4,15 @@
     <singularAlias>Office</singularAlias>
     <pluralAlias>Offices</pluralAlias>
     <iconStyleClass>fa fa-building</iconStyleClass>
-    <bizKey expression="Office - {streetAddress}"/>
+    <bizKey expression="Office - {streetAddress1}"/>
     <attributes>
-        <text required="true" name="streetAddress">
+        <text required="true" name="streetAddress1">
             <displayName>Street Address</displayName>
+            <dynamic>false</dynamic>
+            <length>200</length>
+        </text>
+        <text required="true" name="streetAddress2">
+            <displayName>Street Address 2</displayName>
             <dynamic>false</dynamic>
             <length>200</length>
         </text>
