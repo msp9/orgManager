@@ -1,20 +1,29 @@
 package modules.orgManager.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.domain.types.DateOnly;
+import org.skyve.domain.types.Enumeration;
 import org.skyve.impl.domain.AbstractPersistentBean;
 import org.skyve.impl.domain.types.jaxb.DateOnlyMapper;
+import org.skyve.impl.domain.types.jaxb.GeometryMapper;
+import org.skyve.metadata.model.document.Bizlet.DomainValue;
+import org.skyve.util.Util;
 
 /**
  * Staff
  * 
+ * @depend - - - Status
  * @navhas n baseOffice 0..1 Office
  * @stereotype "persistent"
  */
@@ -43,7 +52,94 @@ public class Staff extends AbstractPersistentBean {
 	public static final String dateOfBirthPropertyName = "dateOfBirth";
 
 	/** @hidden */
+	public static final String locationPropertyName = "location";
+
+	/** @hidden */
+	public static final String imagePropertyName = "image";
+
+	/** @hidden */
 	public static final String baseOfficePropertyName = "baseOffice";
+
+	/** @hidden */
+	public static final String statusPropertyName = "status";
+
+	/**
+	 * Status
+	 **/
+	@XmlEnum
+	public static enum Status implements Enumeration {
+		in("In", "In Office"),
+		outToLunch("Out To Lunch", "Out To Lunch"),
+		out("Out", "Out");
+
+		private String code;
+		private String description;
+
+		/** @hidden */
+		private DomainValue domainValue;
+
+		/** @hidden */
+		private static List<DomainValue> domainValues;
+
+		private Status(String code, String description) {
+			this.code = code;
+			this.description = description;
+			this.domainValue = new DomainValue(code, description);
+		}
+
+		@Override
+		public String toCode() {
+			return code;
+		}
+
+		@Override
+		public String toLocalisedDescription() {
+			return Util.i18n(description);
+		}
+
+		@Override
+		public DomainValue toDomainValue() {
+			return domainValue;
+		}
+
+		public static Status fromCode(String code) {
+			Status result = null;
+
+			for (Status value : values()) {
+				if (value.code.equals(code)) {
+					result = value;
+					break;
+				}
+			}
+
+			return result;
+		}
+
+		public static Status fromLocalisedDescription(String description) {
+			Status result = null;
+
+			for (Status value : values()) {
+				if (value.toLocalisedDescription().equals(description)) {
+					result = value;
+					break;
+				}
+			}
+
+			return result;
+		}
+
+		public static List<DomainValue> toDomainValues() {
+			if (domainValues == null) {
+				Status[] values = values();
+				domainValues = new ArrayList<>(values.length);
+				for (Status value : values) {
+					domainValues.add(value.domainValue);
+				}
+			}
+
+			return domainValues;
+		}
+	}
 
 	/**
 	 * Code
@@ -61,9 +157,24 @@ public class Staff extends AbstractPersistentBean {
 	private DateOnly dateOfBirth;
 
 	/**
+	 * Location
+	 **/
+	private Geometry location;
+
+	/**
+	 * Image
+	 **/
+	private String image;
+
+	/**
 	 * Office
 	 **/
 	private Office baseOffice = null;
+
+	/**
+	 * Status
+	 **/
+	private Status status = Status.in;
 
 	@Override
 	@XmlTransient
@@ -163,6 +274,43 @@ public class Staff extends AbstractPersistentBean {
 	}
 
 	/**
+	 * {@link #location} accessor.
+	 * @return	The value.
+	 **/
+	public Geometry getLocation() {
+		return location;
+	}
+
+	/**
+	 * {@link #location} mutator.
+	 * @param location	The new value.
+	 **/
+	@XmlElement
+	@XmlJavaTypeAdapter(GeometryMapper.class)
+	public void setLocation(Geometry location) {
+		preset(locationPropertyName, location);
+		this.location = location;
+	}
+
+	/**
+	 * {@link #image} accessor.
+	 * @return	The value.
+	 **/
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * {@link #image} mutator.
+	 * @param image	The new value.
+	 **/
+	@XmlElement
+	public void setImage(String image) {
+		preset(imagePropertyName, image);
+		this.image = image;
+	}
+
+	/**
 	 * {@link #baseOffice} accessor.
 	 * @return	The value.
 	 **/
@@ -180,5 +328,23 @@ public class Staff extends AbstractPersistentBean {
 			preset(baseOfficePropertyName, baseOffice);
 			this.baseOffice = baseOffice;
 		}
+	}
+
+	/**
+	 * {@link #status} accessor.
+	 * @return	The value.
+	 **/
+	public Status getStatus() {
+		return status;
+	}
+
+	/**
+	 * {@link #status} mutator.
+	 * @param status	The new value.
+	 **/
+	@XmlElement
+	public void setStatus(Status status) {
+		preset(statusPropertyName, status);
+		this.status = status;
 	}
 }

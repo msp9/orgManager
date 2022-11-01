@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
+    <documents/>
+    <roles/>
+    <queries>
+        <query documentName="Office" name="Office">
+            <description><![CDATA[All Offices]]></description>
+            <columns>
+                <column binding="streetAddress1" sortOrder="ascending"/>
+                <column binding="streetAddress2"/>
+                <column binding="levelUnit"/>
+                <column binding="buildingName"/>
+                <column binding="postcode"/>
+                <column binding="phone"/>
+                <content display="thumbnail" pixelHeight="64" binding="fileInstructions" pixelWidth="64"/>
+            </columns>
+        </query>
+        <query documentName="Staff" name="Staff">
+            <description><![CDATA[All Staffs]]></description>
+            <columns>
+                <column binding="code" sortOrder="ascending"/>
+                <column binding="name"/>
+                <column binding="dateOfBirth"/>
+                <column binding="location"/>
+                <content display="thumbnail" pixelHeight="64" binding="image" pixelWidth="64"/>
+                <column binding="status"/>
+            </columns>
+        </query>
+    </queries>
+</module>

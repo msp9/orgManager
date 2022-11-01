@@ -46,6 +46,9 @@ public class Office extends AbstractPersistentBean {
 	/** @hidden */
 	public static final String phonePropertyName = "phone";
 
+	/** @hidden */
+	public static final String fileInstructionsPropertyName = "fileInstructions";
+
 	/**
 	 * Street Address
 	 **/
@@ -75,6 +78,11 @@ public class Office extends AbstractPersistentBean {
 	 * Phone
 	 **/
 	private String phone;
+
+	/**
+	 * Evacuation Instructions
+	 **/
+	private String fileInstructions;
 
 	@Override
 	@XmlTransient
@@ -223,5 +231,23 @@ public class Office extends AbstractPersistentBean {
 	public void setPhone(String phone) {
 		preset(phonePropertyName, phone);
 		this.phone = phone;
+	}
+
+	/**
+	 * {@link #fileInstructions} accessor.
+	 * @return	The value.
+	 **/
+	public String getFileInstructions() {
+		return fileInstructions;
+	}
+
+	/**
+	 * {@link #fileInstructions} mutator.
+	 * @param fileInstructions	The new value.
+	 **/
+	@XmlElement
+	public void setFileInstructions(String fileInstructions) {
+		preset(fileInstructionsPropertyName, fileInstructions);
+		this.fileInstructions = fileInstructions;
 	}
 }

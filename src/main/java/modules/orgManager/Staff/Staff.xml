@@ -21,11 +21,28 @@
 		<date name="dateOfBirth">
 			<displayName>Date Of Birth</displayName>
 		</date>
+		<geometry name="location">
+			<displayName>Location</displayName>
+		</geometry>
+		<image name="image">
+			<displayName>Image</displayName>
+		</image>
+
 		<association name="baseOffice" type="aggregation">
 			<displayName>Office</displayName>
 			<documentName>Office</documentName>
 
 		</association>
+		<enum name="status">
+			<displayName>Status</displayName>
+			<defaultValue>in</defaultValue>
+			<values>
+				<value code="In" name="in" description="In Office"/>
+				<value code="Out To Lunch" name="outToLunch"/>
+				<value code="Out" name="out"/>
+			</values>
+
+		</enum>
 
 	</attributes>
 </document>

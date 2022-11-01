@@ -7,13 +7,13 @@
 	<homeDocument>Office</homeDocument>
 	<documents>
 		<document ref="Office" />
-		<document ref="Staff" />
+		<document ref="Staff" defaultQueryName="qStaff" />
 	</documents>
 	<roles>
 		<role name="Viewer">
 			<description><![CDATA[Enough privileges to view Org Manager documents.]]></description>
 			<privileges>
-				
+
 				<document name="Office" permission="_R__C" />
 				<document name="Staff" permission="_R__C" />
 			</privileges>
@@ -22,7 +22,7 @@
 		<role name="Maintainer">
 			<description><![CDATA[Enough privileges to create and edit Org Manager documents.]]></description>
 			<privileges>
-				
+
 				<document name="Office" permission="CRUDC" />
 				<document name="Staff" permission="CRUDC" />
 			</privileges>
@@ -39,4 +39,25 @@
 			<role name="Viewer" />
 		</list>
 	</menu>
+	<queries>
+		<query documentName="Staff" name="qStaff">
+			<description><![CDATA[All Staffs]]></description>
+			<columns>
+			<content display="thumbnail" pixelHeight="64"
+					binding="image" pixelWidth="128" />
+				<column binding="code" sortOrder="ascending" />
+				<column binding="name" />
+				<column binding="dateOfBirth" pixelWidth="100"/>
+				<!-- <column binding="location" hidden="true" /> -->
+				<column binding="status">
+				</column>
+				
+				<!-- <column binding="status">
+					<filterOperator>equal</filterOperator>
+					<filterExpression>In</filterExpression>
+				</column> -->
+				<column binding="baseOffice.buildingName" />
+			</columns>
+		</query>
+	</queries>
 </module>
