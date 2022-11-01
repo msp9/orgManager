@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://www.skyve.org/xml/document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="NewDocument" xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
-    <persistent name="NEW_DOCUMENT"/>
-    <singularAlias>New Document</singularAlias>
-    <pluralAlias>New Documents</pluralAlias>
-    <bizKey expression="New Document"/>
-    <attributes/>
-</document>

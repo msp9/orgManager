@@ -4,7 +4,7 @@
     <singularAlias>Office</singularAlias>
     <pluralAlias>Offices</pluralAlias>
     <iconStyleClass>fa fa-building</iconStyleClass>
-    <bizKey expression="Office - {streetAddress1}"/>
+    <bizKey expression="Office - {buildingName}"/>
     <attributes>
         <text required="true" name="streetAddress1">
             <displayName>Street Address</displayName>
