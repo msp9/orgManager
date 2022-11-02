@@ -21,4 +21,11 @@ public class StaffExtension extends Staff {
 		return super.getAgeInYears();
 	}
 
+	public void home() {
+		if (this.getBaseOffice() != null) {
+			this.setLocation(this.getBaseOffice().getBoundary().getCentroid());
+		}
+
+	}
+
 }

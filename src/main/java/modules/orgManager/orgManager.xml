@@ -21,7 +21,9 @@
             <description><![CDATA[Enough privileges to create and edit Org Manager documents.]]></description>
             <privileges>
                 <document name="Office" permission="CRUDC"/>
-                <document name="Staff" permission="CRUDC"/>
+                <document name="Staff" permission="CRUDC" >
+                <action name="SendHome"></action>
+                </document>
                 <document name="StaffStatusHistory" permission="_R__C"/>
             </privileges>
             <accesses/>

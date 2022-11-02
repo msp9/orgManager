@@ -43,6 +43,17 @@
 		</row>
 
 	</form>
+			<form borderTitle="Map" border="true">
+
+			<column />
+			<row>
+				<item showLabel="false">
+					<geometryMap binding="boundary">
+						<onChangedHandlers />
+					</geometryMap>
+				</item>
+			</row>
+		</form>
 	<listGrid continueConversation="true" query="qStaff">
 		<filterParameter operator="equal"
 			filterBinding="baseOffice" valueBinding="bizId" />

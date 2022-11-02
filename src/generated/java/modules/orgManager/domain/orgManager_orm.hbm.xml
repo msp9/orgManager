@@ -24,6 +24,7 @@
 		<property name="streetAddress2" length="200" />
 		<property name="levelUnit" length="200" />
 		<property name="buildingName" length="200" />
+		<property name="boundary" />
 		<property name="postcode" length="4" />
 		<property name="phone" length="12" />
 		<property name="fileInstructions" length="36" />

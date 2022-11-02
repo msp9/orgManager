@@ -28,6 +28,10 @@
 			<dynamic>false</dynamic>
 			<length>200</length>
 		</text>
+		<geometry name="boundary">
+			<displayName>Office Boundary</displayName>
+			
+		</geometry>
 		<text name="postcode">
 			<displayName>Postcode</displayName>
 			<dynamic>false</dynamic>

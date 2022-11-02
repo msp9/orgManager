@@ -6,10 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import modules.orgManager.Staff.StaffExtension;
+import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.impl.domain.AbstractPersistentBean;
+import org.skyve.impl.domain.types.jaxb.GeometryMapper;
 
 /**
  * Office
@@ -44,6 +47,9 @@ public class Office extends AbstractPersistentBean {
 	public static final String buildingNamePropertyName = "buildingName";
 
 	/** @hidden */
+	public static final String boundaryPropertyName = "boundary";
+
+	/** @hidden */
 	public static final String postcodePropertyName = "postcode";
 
 	/** @hidden */
@@ -74,6 +80,11 @@ public class Office extends AbstractPersistentBean {
 	 * Building Name
 	 **/
 	private String buildingName;
+
+	/**
+	 * Office Boundary
+	 **/
+	private Geometry boundary;
 
 	/**
 	 * Postcode
@@ -206,6 +217,25 @@ public class Office extends AbstractPersistentBean {
 	public void setBuildingName(String buildingName) {
 		preset(buildingNamePropertyName, buildingName);
 		this.buildingName = buildingName;
+	}
+
+	/**
+	 * {@link #boundary} accessor.
+	 * @return	The value.
+	 **/
+	public Geometry getBoundary() {
+		return boundary;
+	}
+
+	/**
+	 * {@link #boundary} mutator.
+	 * @param boundary	The new value.
+	 **/
+	@XmlElement
+	@XmlJavaTypeAdapter(GeometryMapper.class)
+	public void setBoundary(Geometry boundary) {
+		preset(boundaryPropertyName, boundary);
+		this.boundary = boundary;
 	}
 
 	/**

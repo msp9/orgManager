@@ -8,13 +8,15 @@ import org.skyve.domain.types.Timestamp;
 import org.skyve.metadata.model.document.Bizlet;
 import org.skyve.web.WebContext;
 
+import modules.orgManager.Staff.actions.SendHome;
 import modules.orgManager.domain.Staff;
+import modules.orgManager.domain.Staff.Status;
 import modules.orgManager.domain.StaffStatusHistory;
 
-public class StaffBizlet extends Bizlet<Staff> {
+public class StaffBizlet extends Bizlet<StaffExtension> {
 
 	@Override
-	public void validate(Staff bean, ValidationException e) throws Exception {
+	public void validate(StaffExtension bean, ValidationException e) throws Exception {
 		if (bean.getDateOfBirth().after(new DateOnly())) {
 			e.getMessages().add(new Message(Staff.dateOfBirthPropertyName, "You must enter a valid date of Birth"));
 		}
@@ -22,7 +24,7 @@ public class StaffBizlet extends Bizlet<Staff> {
 	}
 
 	@Override
-	public void preSave(Staff bean) throws Exception {
+	public void preSave(StaffExtension bean) throws Exception {
 
 		/*
 		 * if (bean.getStatus() != null &&
@@ -36,7 +38,7 @@ public class StaffBizlet extends Bizlet<Staff> {
 	}
 
 	@Override
-	public Staff newInstance(Staff bean) throws Exception {
+	public StaffExtension newInstance(StaffExtension bean) throws Exception {
 		if (bean.getCode() == null) {
 			bean.setCode(CORE.getNumberGenerator().next("S", Staff.MODULE_NAME, Staff.DOCUMENT_NAME,
 					Staff.codePropertyName, 4));
@@ -45,8 +47,11 @@ public class StaffBizlet extends Bizlet<Staff> {
 	}
 
 	@Override
-	public void preRerender(String source, Staff bean, WebContext webContext) throws Exception {
+	public void preRerender(String source, StaffExtension bean, WebContext webContext) throws Exception {
 		if (bean.getStatus() != null && bean.originalValues().containsKey(Staff.statusPropertyName)) {
+			if(bean.getStatus().equals(Status.in)) {
+				bean.home();
+			}
 			StaffStatusHistory statusHistory = StaffStatusHistory.newInstance();
 			statusHistory.setStatusHistory(bean.getStatus());
 			statusHistory.setStatusTimestamp(new Timestamp());

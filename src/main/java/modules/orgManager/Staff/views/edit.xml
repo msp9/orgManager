@@ -68,6 +68,11 @@
 					</geometryMap>
 				</item>
 			</row>
+			<row>
+				<item>
+					<button action="SendHome" pixelWidth="100" pixelHeight="55"></button>
+				</item>
+			</row>
 		</form>
 
 
@@ -86,6 +91,8 @@
 
 	<actions>
 		<defaults />
+		<action className="SendHome" displayName="Send Home"
+			inActionPanel="false" iconStyleClass="fa fa-cog"></action>
 	</actions>
 	<newParameters />
 </view>
