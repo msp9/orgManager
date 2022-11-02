@@ -27,13 +27,17 @@
 		<property name="postcode" length="4" />
 		<property name="phone" length="12" />
 		<property name="fileInstructions" length="36" />
+		<bag name="allStaff" inverse="true">
+			<key column="baseOffice_id" />
+			<one-to-many entity-name="orgManagerStaff" />
+		</bag>
 		<filter name="orgManagerOfficeNoneFilter" condition="1=0"/>
 		<filter name="orgManagerOfficeCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="orgManagerOfficeDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
 		<filter name="orgManagerOfficeUserIdFilter" condition="bizUserId=:userIdParam"/>
 	</class>
 
-	<class name="modules.orgManager.domain.Staff" table="ORG_Staff" entity-name="orgManagerStaff">
+	<class name="modules.orgManager.Staff.StaffExtension" table="ORG_Staff" entity-name="orgManagerStaff">
 		<id name="bizId" length="36" />
 		<version name="bizVersion" unsaved-value="null" />
 		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
@@ -53,10 +57,36 @@
 				<param name="enumClass">modules.orgManager.domain.Staff$Status</param>
 			</type>
 		</property>
+		<bag name="histories" order-by="statusTimestamp desc" cascade="all-delete-orphan">
+			<key column="parent_id" />
+			<one-to-many entity-name="orgManagerStaffStatusHistory" />
+		</bag>
 		<filter name="orgManagerStaffNoneFilter" condition="1=0"/>
 		<filter name="orgManagerStaffCustomerFilter" condition="bizCustomer=:customerParam"/>
 		<filter name="orgManagerStaffDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
 		<filter name="orgManagerStaffUserIdFilter" condition="bizUserId=:userIdParam"/>
+	</class>
+
+	<class name="modules.orgManager.domain.StaffStatusHistory" table="ORG_StaffStatusHistory" entity-name="orgManagerStaffStatusHistory">
+		<id name="bizId" length="36" />
+		<version name="bizVersion" unsaved-value="null" />
+		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
+		<property name="bizKey" length="1024" not-null="true" />
+		<property name="bizCustomer" length="50" not-null="true" />
+		<property name="bizFlagComment" length="1024" />
+		<property name="bizDataGroupId" length="36" />
+		<property name="bizUserId" length="36" not-null="true" />
+		<many-to-one name="parent" entity-name="orgManagerStaff" column="parent_id" insert="false" update="false" foreign-key="FK_ORG_StaffStatusHistory_parent" />
+		<property name="statusHistory" length="12">
+			<type name="Enum">
+				<param name="enumClass">modules.orgManager.domain.Staff$Status</param>
+			</type>
+		</property>
+		<property name="statusTimestamp" type="Timestamp" />
+		<filter name="orgManagerStaffStatusHistoryNoneFilter" condition="1=0"/>
+		<filter name="orgManagerStaffStatusHistoryCustomerFilter" condition="bizCustomer=:customerParam"/>
+		<filter name="orgManagerStaffStatusHistoryDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
+		<filter name="orgManagerStaffStatusHistoryUserIdFilter" condition="bizUserId=:userIdParam"/>
 	</class>
 
 	<filter-def name="orgManagerOfficeNoneFilter" />
@@ -77,6 +107,16 @@
 		<filter-param name="dataGroupIdParam" type="string"/>
 	</filter-def>
 	<filter-def name="orgManagerStaffUserIdFilter">
+		<filter-param name="userIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerStaffStatusHistoryNoneFilter" />
+	<filter-def name="orgManagerStaffStatusHistoryCustomerFilter">
+		<filter-param name="customerParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerStaffStatusHistoryDataGroupIdFilter">
+		<filter-param name="dataGroupIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerStaffStatusHistoryUserIdFilter">
 		<filter-param name="userIdParam" type="string"/>
 	</filter-def>
 </hibernate-mapping>

@@ -37,12 +37,23 @@
 			<displayName>Status</displayName>
 			<defaultValue>in</defaultValue>
 			<values>
-				<value code="In" name="in" description="In Office"/>
-				<value code="Out To Lunch" name="outToLunch"/>
-				<value code="Out" name="out"/>
+				<value code="In" name="in" description="In Office" />
+				<value code="Out To Lunch" name="outToLunch" />
+				<value code="Out" name="out" />
 			</values>
 
 		</enum>
+		<integer name="ageInYears" persistent="false" audited="false"
+			trackChanges="false">
+			<displayName>Age In Years</displayName>
+			<description>How old is the person</description>
+		</integer>
+		<collection type="child" name="histories">
+			<displayName>Status History</displayName>
+			<documentName>StaffStatusHistory</documentName>
+			<minCardinality>0</minCardinality>
+			<ordering><order sort="descending" by="statusTimestamp"/></ordering>
+		</collection>
 
 	</attributes>
 </document>

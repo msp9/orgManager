@@ -2,14 +2,16 @@
 <view xmlns="http://www.skyve.org/xml/view"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="edit"
 	title="Staff"
-	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd">
-	<hbox>
-		<form  border="true" borderTitle="Staff Details">
+	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd"
+	xmlns:c="http://www.skyve.org/xml/common">
+	<hbox border="true">
+		<form border="true" borderTitle="Staff Details">
 			<column percentageWidth="30" responsiveWidth="4" />
 			<column />
 			<row>
 				<item>
-					<default binding="code" />
+					<textField binding="code" visible="persisted"
+						disabled="true" />
 				</item>
 			</row>
 			<row>
@@ -19,7 +21,16 @@
 			</row>
 			<row>
 				<item>
-					<default binding="dateOfBirth" />
+					<textField binding="dateOfBirth">
+						<onChangedHandlers>
+							<rerender />
+						</onChangedHandlers>
+					</textField>
+				</item>
+			</row>
+			<row>
+				<item>
+					<textField binding="ageInYears" disabled="true" />
 				</item>
 			</row>
 
@@ -35,12 +46,20 @@
 			</row>
 			<row>
 				<item>
-					<default binding="status" />
+					<combo binding="status">
+						<onChangedHandlers>
+							<rerender>
+								<properties>
+									<c:property key="update">statusGrid</c:property>
+								</properties>
+							</rerender>
+						</onChangedHandlers>
+					</combo>
 				</item>
 			</row>
 		</form>
-		<form  borderTitle="Map" border="true">
-			
+		<form borderTitle="Map" border="true">
+
 			<column />
 			<row>
 				<item showLabel="false">
@@ -50,7 +69,21 @@
 				</item>
 			</row>
 		</form>
+
+
+
+
+
+
 	</hbox>
+	<vbox widgetId="statusGrid">
+		<dataGrid binding="histories" showAdd="false"
+			showEdit="false" showZoom="false" showRemove="false">
+			<boundColumn binding="statusHistory" />
+			<boundColumn binding="statusTimestamp" />
+		</dataGrid>
+	</vbox>
+
 	<actions>
 		<defaults />
 	</actions>

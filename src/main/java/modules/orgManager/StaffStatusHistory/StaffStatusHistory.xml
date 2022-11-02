@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.skyve.org/xml/document"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="StaffStatusHistory"
+	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+	<persistent name="ORG_StaffStatusHistory" />
+	<singularAlias>StaffStatusHistory</singularAlias>
+	<pluralAlias>staffstatushistories</pluralAlias>
+	<parentDocument>Staff</parentDocument>
+	<bizKey expression="StaffStatusHistory" />
+	<attributes>
+		<enum moduleRef="orgManager" documentRef="Staff"
+			attributeRef="status" name="statusHistory">
+			<displayName>Staff Status</displayName>
+		</enum>
+		<timestamp name="statusTimestamp">
+			<displayName>Status Timestamp</displayName>
+		</timestamp>
+	</attributes>
+
+</document>

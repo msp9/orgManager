@@ -9,12 +9,14 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import modules.orgManager.Staff.StaffExtension;
 import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.domain.types.DateOnly;
 import org.skyve.domain.types.Enumeration;
 import org.skyve.impl.domain.AbstractPersistentBean;
+import org.skyve.impl.domain.ChangeTrackingArrayList;
 import org.skyve.impl.domain.types.jaxb.DateOnlyMapper;
 import org.skyve.impl.domain.types.jaxb.GeometryMapper;
 import org.skyve.metadata.model.document.Bizlet.DomainValue;
@@ -25,11 +27,12 @@ import org.skyve.util.Util;
  * 
  * @depend - - - Status
  * @navhas n baseOffice 0..1 Office
+ * @navcomposed 1 histories 0..n StaffStatusHistory
  * @stereotype "persistent"
  */
 @XmlType
 @XmlRootElement
-public class Staff extends AbstractPersistentBean {
+public abstract class Staff extends AbstractPersistentBean {
 	/**
 	 * For Serialization
 	 * @hidden
@@ -62,6 +65,12 @@ public class Staff extends AbstractPersistentBean {
 
 	/** @hidden */
 	public static final String statusPropertyName = "status";
+
+	/** @hidden */
+	public static final String ageInYearsPropertyName = "ageInYears";
+
+	/** @hidden */
+	public static final String historiesPropertyName = "histories";
 
 	/**
 	 * Status
@@ -176,6 +185,18 @@ public class Staff extends AbstractPersistentBean {
 	 **/
 	private Status status = Status.in;
 
+	/**
+	 * Age In Years
+	 * <br/>
+	 * How old is the person
+	 **/
+	private Integer ageInYears;
+
+	/**
+	 * Status History
+	 **/
+	private List<StaffStatusHistory> histories = new ChangeTrackingArrayList<>("histories", this);
+
 	@Override
 	@XmlTransient
 	public String getBizModule() {
@@ -188,7 +209,7 @@ public class Staff extends AbstractPersistentBean {
 		return Staff.DOCUMENT_NAME;
 	}
 
-	public static Staff newInstance() {
+	public static StaffExtension newInstance() {
 		try {
 			return CORE.getUser().getCustomer().getModule(MODULE_NAME).getDocument(CORE.getUser().getCustomer(), DOCUMENT_NAME).newInstance(CORE.getUser());
 		}
@@ -326,8 +347,19 @@ public class Staff extends AbstractPersistentBean {
 	public void setBaseOffice(Office baseOffice) {
 		if (this.baseOffice != baseOffice) {
 			preset(baseOfficePropertyName, baseOffice);
+			Office oldBaseOffice = this.baseOffice;
 			this.baseOffice = baseOffice;
+			if ((baseOffice != null) && (baseOffice.getAllStaffElementById(getBizId()) == null)) {
+				baseOffice.getAllStaff().add((StaffExtension) this);
+			}
+			if (oldBaseOffice != null) {
+				oldBaseOffice.getAllStaff().remove(this);
+			}
 		}
+	}
+
+	public void nullBaseOffice() {
+		this.baseOffice = null;
 	}
 
 	/**
@@ -346,5 +378,93 @@ public class Staff extends AbstractPersistentBean {
 	public void setStatus(Status status) {
 		preset(statusPropertyName, status);
 		this.status = status;
+	}
+
+	/**
+	 * {@link #ageInYears} accessor.
+	 * @return	The value.
+	 **/
+	public Integer getAgeInYears() {
+		return ageInYears;
+	}
+
+	/**
+	 * {@link #ageInYears} mutator.
+	 * @param ageInYears	The new value.
+	 **/
+	@XmlElement
+	public void setAgeInYears(Integer ageInYears) {
+		this.ageInYears = ageInYears;
+	}
+
+	/**
+	 * {@link #histories} accessor.
+	 * @return	The value.
+	 **/
+	@XmlElement
+	public List<StaffStatusHistory> getHistories() {
+		return histories;
+	}
+
+	/**
+	 * {@link #histories} accessor.
+	 * @param bizId	The bizId of the element in the list.
+	 * @return	The value of the element in the list.
+	 **/
+	public StaffStatusHistory getHistoriesElementById(String bizId) {
+		return getElementById(histories, bizId);
+	}
+
+	/**
+	 * {@link #histories} mutator.
+	 * @param bizId	The bizId of the element in the list.
+	 * @param element	The new value of the element in the list.
+	 **/
+	public void setHistoriesElementById(String bizId, StaffStatusHistory element) {
+		setElementById(histories, element);
+	}
+
+	/**
+	 * {@link #histories} add.
+	 * @param element	The element to add.
+	 **/
+	public boolean addHistoriesElement(StaffStatusHistory element) {
+		boolean result = histories.add(element);
+		if (result) {
+			element.setParent((StaffExtension) this);
+		}
+		return result;
+	}
+
+	/**
+	 * {@link #histories} add.
+	 * @param index	The index in the list to add the element to.
+	 * @param element	The element to add.
+	 **/
+	public void addHistoriesElement(int index, StaffStatusHistory element) {
+		histories.add(index, element);
+		element.setParent((StaffExtension) this);
+	}
+
+	/**
+	 * {@link #histories} remove.
+	 * @param element	The element to remove.
+	 **/
+	public boolean removeHistoriesElement(StaffStatusHistory element) {
+		boolean result = histories.remove(element);
+		if (result) {
+			element.setParent(null);
+		}
+		return result;
+	}
+
+	/**
+	 * {@link #histories} remove.
+	 * @param index	The index in the list to remove the element from.
+	 **/
+	public StaffStatusHistory removeHistoriesElement(int index) {
+		StaffStatusHistory result = histories.remove(index);
+		result.setParent(null);
+		return result;
 	}
 }

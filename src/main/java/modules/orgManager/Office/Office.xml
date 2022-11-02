@@ -43,5 +43,10 @@
 		<content name="fileInstructions">
 			<displayName>Evacuation Instructions</displayName>
 		</content>
+		<inverseMany name="allStaff">
+			<displayName>All Staff</displayName>
+			<documentName>Staff</documentName>
+			<referenceName>baseOffice</referenceName>
+		</inverseMany>
 	</attributes>
 </document>

@@ -45,8 +45,14 @@
 	</form>
 	<listGrid continueConversation="true" query="qStaff">
 		<filterParameter operator="equal"
-			filterBinding="baseOffice" valueBinding="bizId"/>
+			filterBinding="baseOffice" valueBinding="bizId" />
 	</listGrid>
+
+
+	<dataGrid binding="allStaff">
+		<boundColumn binding="code" />
+		<boundColumn binding="name" />
+	</dataGrid>
 	<actions>
 		<defaults />
 	</actions>
