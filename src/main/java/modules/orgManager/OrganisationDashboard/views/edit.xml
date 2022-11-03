@@ -26,7 +26,7 @@
 		<chart type="bar">
 			<model title="Staff status by BaseOffice" moduleName="orgManager"
 				documentName="Staff" label="Staff" valueBinding="bizId"
-				valueFunction="Count" categoryBinding="baseOffice">
+				valueFunction="Count" categoryBinding="baseOffice.buildingName">
 				
 				<noBucket />
 				
