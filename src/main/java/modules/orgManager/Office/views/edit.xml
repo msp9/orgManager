@@ -71,7 +71,7 @@
 	</listGrid>
 
 
-	<dataGrid binding="allStaff" >
+	<dataGrid binding="allStaff">
 		<boundColumn binding="code" />
 		<boundColumn binding="name" />
 	</dataGrid>
