@@ -2,6 +2,7 @@ package modules.orgManager.Office;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.skyve.CORE;
 import org.skyve.persistence.DocumentQuery;
@@ -37,30 +38,31 @@ public class OfficeExtension extends Office {
 
 	public void calculateStaffsNeverBeenToOffice() {
 		// Retrieves all the staff at the base office
+		/*
+		 * DocumentQuery q = CORE.getPersistence().newDocumentQuery(Staff.MODULE_NAME,
+		 * Staff.DOCUMENT_NAME); q.getFilter().addEquals(Staff.baseOfficePropertyName,
+		 * this); List<StaffExtension> staffs = q.beanResults(); List<StaffExtension>
+		 * staffsNeverInOffice = new ArrayList<StaffExtension>(); List<StaffExtension>
+		 * staffsInOffice = new ArrayList<StaffExtension>(); boolean b = false;
+		 * 
+		 * for (StaffExtension s : staffs) { List<StaffStatusHistory> history =
+		 * s.getHistories(); for (StaffStatusHistory h : history) { if
+		 * (h.equals(Status.in) || h.equals(Status.outToLunch)) { b = true; break; } }
+		 * if(b==false) { this.addListStaffNeverInOfficeElement(s);
+		 * staffsNeverInOffice.add(s); } b=false;
+		 * 
+		 * }
+		 */
+		// Retrieves all the staff at the base office
 		DocumentQuery q = CORE.getPersistence().newDocumentQuery(Staff.MODULE_NAME, Staff.DOCUMENT_NAME);
 		q.getFilter().addEquals(Staff.baseOfficePropertyName, this);
 		List<StaffExtension> staffs = q.beanResults();
 		List<StaffExtension> staffsNeverInOffice = new ArrayList<StaffExtension>();
-		List<StaffExtension> staffsInOffice = new ArrayList<StaffExtension>();
-		boolean b = false;
 
-		for (StaffExtension s : staffs) {
-			List<StaffStatusHistory> history = s.getHistories();
-			for (StaffStatusHistory h : history) {
-				if (h.equals(Status.in) || h.equals(Status.outToLunch)) {
-					b = true;
-					break;
-				}
-			}
-			if(b==false) {
-				this.addListStaffNeverInOfficeElement(s);
-				staffsNeverInOffice.add(s);
-			}
-			b=false;
+		staffsNeverInOffice.addAll(staffs.stream().filter(
+				staff -> staff.getHistories().stream().allMatch(hist -> hist != null && hist.equals(Status.out)))
+				.collect(Collectors.toList()));
 
-		}
-		
 	}
-	
 
 }
