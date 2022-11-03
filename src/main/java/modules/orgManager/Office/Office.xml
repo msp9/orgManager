@@ -30,7 +30,7 @@
 		</text>
 		<geometry name="boundary">
 			<displayName>Office Boundary</displayName>
-			
+
 		</geometry>
 		<text name="postcode">
 			<displayName>Postcode</displayName>
@@ -44,6 +44,16 @@
 			<length>12</length>
 			<format mask="############" />
 		</text>
+		<integer name="noOfStaffInOffice" persistent="false"
+			audited="false" trackChanges="false">
+			<displayName>Number of Staff In Office</displayName>
+			<description>Number of Staff present In Office</description>
+		</integer>
+		<integer name="totalNoOfStaffInOffice" persistent="false"
+			audited="false" trackChanges="false">
+			<displayName>Total Number of Staff</displayName>
+			<description>Total Number of Staff In Office</description>
+		</integer>
 		<content name="fileInstructions">
 			<displayName>Evacuation Instructions</displayName>
 		</content>
@@ -52,5 +62,11 @@
 			<documentName>Staff</documentName>
 			<referenceName>baseOffice</referenceName>
 		</inverseMany>
+		<collection type="aggregation" name="listStaffNeverInOffice">
+			<displayName>Staff Never In Office</displayName>
+			<documentName>Staff</documentName>
+			<minCardinality>0</minCardinality>
+	
+		</collection>
 	</attributes>
 </document>

@@ -41,26 +41,41 @@
 				<contentImage binding="fileInstructions" />
 			</item>
 		</row>
+		<row>
+			<item>
+				<textField binding="noOfStaffInOffice" disabled="true" />
+			</item>
+		</row>
+
+		<row>
+			<item>
+				<textField binding="totalNoOfStaffInOffice" disabled="true" />
+			</item>
+		</row>
 
 	</form>
-			<form borderTitle="Map" border="true">
+	<form borderTitle="Map" border="true">
 
-			<column />
-			<row>
-				<item showLabel="false">
-					<geometryMap binding="boundary">
-						<onChangedHandlers />
-					</geometryMap>
-				</item>
-			</row>
-		</form>
+		<column />
+		<row>
+			<item showLabel="false">
+				<geometryMap binding="boundary">
+					<onChangedHandlers />
+				</geometryMap>
+			</item>
+		</row>
+	</form>
 	<listGrid continueConversation="true" query="qStaff">
 		<filterParameter operator="equal"
 			filterBinding="baseOffice" valueBinding="bizId" />
 	</listGrid>
 
 
-	<dataGrid binding="allStaff">
+	<dataGrid binding="allStaff" >
+		<boundColumn binding="code" />
+		<boundColumn binding="name" />
+	</dataGrid>
+		<dataGrid binding="listStaffNeverInOffice">
 		<boundColumn binding="code" />
 		<boundColumn binding="name" />
 	</dataGrid>

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import modules.orgManager.Office.OfficeExtension;
 import modules.orgManager.Staff.StaffExtension;
 import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
@@ -178,7 +179,7 @@ public abstract class Staff extends AbstractPersistentBean {
 	/**
 	 * Office
 	 **/
-	private Office baseOffice = null;
+	private OfficeExtension baseOffice = null;
 
 	/**
 	 * Status
@@ -335,7 +336,7 @@ public abstract class Staff extends AbstractPersistentBean {
 	 * {@link #baseOffice} accessor.
 	 * @return	The value.
 	 **/
-	public Office getBaseOffice() {
+	public OfficeExtension getBaseOffice() {
 		return baseOffice;
 	}
 
@@ -344,10 +345,10 @@ public abstract class Staff extends AbstractPersistentBean {
 	 * @param baseOffice	The new value.
 	 **/
 	@XmlElement
-	public void setBaseOffice(Office baseOffice) {
+	public void setBaseOffice(OfficeExtension baseOffice) {
 		if (this.baseOffice != baseOffice) {
 			preset(baseOfficePropertyName, baseOffice);
-			Office oldBaseOffice = this.baseOffice;
+			OfficeExtension oldBaseOffice = this.baseOffice;
 			this.baseOffice = baseOffice;
 			if ((baseOffice != null) && (baseOffice.getAllStaffElementById(getBizId()) == null)) {
 				baseOffice.getAllStaff().add((StaffExtension) this);

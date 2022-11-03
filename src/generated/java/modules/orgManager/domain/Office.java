@@ -7,21 +7,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import modules.orgManager.Office.OfficeExtension;
 import modules.orgManager.Staff.StaffExtension;
 import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.impl.domain.AbstractPersistentBean;
+import org.skyve.impl.domain.ChangeTrackingArrayList;
 import org.skyve.impl.domain.types.jaxb.GeometryMapper;
 
 /**
  * Office
  * 
+ * @navhas n listStaffNeverInOffice 0..n Staff
  * @stereotype "persistent"
  */
 @XmlType
 @XmlRootElement
-public class Office extends AbstractPersistentBean {
+public abstract class Office extends AbstractPersistentBean {
 	/**
 	 * For Serialization
 	 * @hidden
@@ -56,10 +59,19 @@ public class Office extends AbstractPersistentBean {
 	public static final String phonePropertyName = "phone";
 
 	/** @hidden */
+	public static final String noOfStaffInOfficePropertyName = "noOfStaffInOffice";
+
+	/** @hidden */
+	public static final String totalNoOfStaffInOfficePropertyName = "totalNoOfStaffInOffice";
+
+	/** @hidden */
 	public static final String fileInstructionsPropertyName = "fileInstructions";
 
 	/** @hidden */
 	public static final String allStaffPropertyName = "allStaff";
+
+	/** @hidden */
+	public static final String listStaffNeverInOfficePropertyName = "listStaffNeverInOffice";
 
 	/**
 	 * Street Address
@@ -97,6 +109,20 @@ public class Office extends AbstractPersistentBean {
 	private String phone;
 
 	/**
+	 * Number of Staff In Office
+	 * <br/>
+	 * Number of Staff present In Office
+	 **/
+	private Integer noOfStaffInOffice;
+
+	/**
+	 * Total Number of Staff
+	 * <br/>
+	 * Total Number of Staff In Office
+	 **/
+	private Integer totalNoOfStaffInOffice;
+
+	/**
 	 * Evacuation Instructions
 	 **/
 	private String fileInstructions;
@@ -105,6 +131,11 @@ public class Office extends AbstractPersistentBean {
 	 * All Staff
 	 **/
 	private List<StaffExtension> allStaff = new ArrayList<>();
+
+	/**
+	 * Staff Never In Office
+	 **/
+	private List<StaffExtension> listStaffNeverInOffice = new ChangeTrackingArrayList<>("listStaffNeverInOffice", this);
 
 	@Override
 	@XmlTransient
@@ -118,7 +149,7 @@ public class Office extends AbstractPersistentBean {
 		return Office.DOCUMENT_NAME;
 	}
 
-	public static Office newInstance() {
+	public static OfficeExtension newInstance() {
 		try {
 			return CORE.getUser().getCustomer().getModule(MODULE_NAME).getDocument(CORE.getUser().getCustomer(), DOCUMENT_NAME).newInstance(CORE.getUser());
 		}
@@ -275,6 +306,40 @@ public class Office extends AbstractPersistentBean {
 	}
 
 	/**
+	 * {@link #noOfStaffInOffice} accessor.
+	 * @return	The value.
+	 **/
+	public Integer getNoOfStaffInOffice() {
+		return noOfStaffInOffice;
+	}
+
+	/**
+	 * {@link #noOfStaffInOffice} mutator.
+	 * @param noOfStaffInOffice	The new value.
+	 **/
+	@XmlElement
+	public void setNoOfStaffInOffice(Integer noOfStaffInOffice) {
+		this.noOfStaffInOffice = noOfStaffInOffice;
+	}
+
+	/**
+	 * {@link #totalNoOfStaffInOffice} accessor.
+	 * @return	The value.
+	 **/
+	public Integer getTotalNoOfStaffInOffice() {
+		return totalNoOfStaffInOffice;
+	}
+
+	/**
+	 * {@link #totalNoOfStaffInOffice} mutator.
+	 * @param totalNoOfStaffInOffice	The new value.
+	 **/
+	@XmlElement
+	public void setTotalNoOfStaffInOffice(Integer totalNoOfStaffInOffice) {
+		this.totalNoOfStaffInOffice = totalNoOfStaffInOffice;
+	}
+
+	/**
 	 * {@link #fileInstructions} accessor.
 	 * @return	The value.
 	 **/
@@ -328,7 +393,7 @@ public class Office extends AbstractPersistentBean {
 		if (getElementById(allStaff, element.getBizId()) == null) {
 			result = allStaff.add(element);
 		}
-		element.setBaseOffice(this);
+		element.setBaseOffice((OfficeExtension) this);
 		return result;
 	}
 
@@ -339,7 +404,7 @@ public class Office extends AbstractPersistentBean {
 	 **/
 	public void addAllStaffElement(int index, StaffExtension element) {
 		allStaff.add(index, element);
-		element.setBaseOffice(this);
+		element.setBaseOffice((OfficeExtension) this);
 	}
 
 	/**
@@ -362,5 +427,65 @@ public class Office extends AbstractPersistentBean {
 		StaffExtension result = allStaff.remove(index);
 		result.nullBaseOffice();
 		return result;
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} accessor.
+	 * @return	The value.
+	 **/
+	@XmlElement
+	public List<StaffExtension> getListStaffNeverInOffice() {
+		return listStaffNeverInOffice;
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} accessor.
+	 * @param bizId	The bizId of the element in the list.
+	 * @return	The value of the element in the list.
+	 **/
+	public StaffExtension getListStaffNeverInOfficeElementById(String bizId) {
+		return getElementById(listStaffNeverInOffice, bizId);
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} mutator.
+	 * @param bizId	The bizId of the element in the list.
+	 * @param element	The new value of the element in the list.
+	 **/
+	public void setListStaffNeverInOfficeElementById(String bizId, StaffExtension element) {
+		setElementById(listStaffNeverInOffice, element);
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} add.
+	 * @param element	The element to add.
+	 **/
+	public boolean addListStaffNeverInOfficeElement(StaffExtension element) {
+		return listStaffNeverInOffice.add(element);
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} add.
+	 * @param index	The index in the list to add the element to.
+	 * @param element	The element to add.
+	 **/
+	public void addListStaffNeverInOfficeElement(int index, StaffExtension element) {
+		listStaffNeverInOffice.add(index, element);
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} remove.
+	 * @param element	The element to remove.
+	 **/
+	public boolean removeListStaffNeverInOfficeElement(StaffExtension element) {
+		return listStaffNeverInOffice.remove(element);
+	}
+
+	/**
+	 * {@link #listStaffNeverInOffice} remove.
+	 * @param index	The index in the list to remove the element from.
+	 **/
+	public StaffExtension removeListStaffNeverInOfficeElement(int index) {
+		return listStaffNeverInOffice.remove(index);
 	}
 }
