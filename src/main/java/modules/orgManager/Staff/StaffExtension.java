@@ -22,7 +22,7 @@ public class StaffExtension extends Staff {
 	}
 
 	public void home() {
-		if (this.getBaseOffice() != null) {
+		if (this.getBaseOffice() != null && this.getBaseOffice().getBoundary()!=null) {
 			this.setLocation(this.getBaseOffice().getBoundary().getCentroid());
 		}
 
