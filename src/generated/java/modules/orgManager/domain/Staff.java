@@ -16,7 +16,6 @@ import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
 import org.skyve.domain.types.DateOnly;
 import org.skyve.domain.types.Enumeration;
-import org.skyve.impl.domain.AbstractPersistentBean;
 import org.skyve.impl.domain.ChangeTrackingArrayList;
 import org.skyve.impl.domain.types.jaxb.DateOnlyMapper;
 import org.skyve.impl.domain.types.jaxb.GeometryMapper;
@@ -33,7 +32,7 @@ import org.skyve.util.Util;
  */
 @XmlType
 @XmlRootElement
-public abstract class Staff extends AbstractPersistentBean {
+public abstract class Staff extends AbstractLastChanged {
 	/**
 	 * For Serialization
 	 * @hidden
@@ -41,9 +40,11 @@ public abstract class Staff extends AbstractPersistentBean {
 	private static final long serialVersionUID = 1L;
 
 	/** @hidden */
+	@SuppressWarnings("hiding")
 	public static final String MODULE_NAME = "orgManager";
 
 	/** @hidden */
+	@SuppressWarnings("hiding")
 	public static final String DOCUMENT_NAME = "Staff";
 
 	/** @hidden */

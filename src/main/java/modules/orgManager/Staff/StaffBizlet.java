@@ -8,12 +8,13 @@ import org.skyve.domain.types.Timestamp;
 import org.skyve.metadata.model.document.Bizlet;
 import org.skyve.web.WebContext;
 
+import modules.orgManager.AbstractLastChanged.AbstractLastChangedBizlet;
 import modules.orgManager.Staff.actions.SendHome;
 import modules.orgManager.domain.Staff;
 import modules.orgManager.domain.Staff.Status;
 import modules.orgManager.domain.StaffStatusHistory;
 
-public class StaffBizlet extends Bizlet<StaffExtension> {
+public class StaffBizlet extends AbstractLastChangedBizlet<StaffExtension> {
 
 	@Override
 	public void validate(StaffExtension bean, ValidationException e) throws Exception {

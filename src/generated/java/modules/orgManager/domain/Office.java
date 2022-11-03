@@ -12,7 +12,6 @@ import modules.orgManager.Staff.StaffExtension;
 import org.locationtech.jts.geom.Geometry;
 import org.skyve.CORE;
 import org.skyve.domain.messages.DomainException;
-import org.skyve.impl.domain.AbstractPersistentBean;
 import org.skyve.impl.domain.ChangeTrackingArrayList;
 import org.skyve.impl.domain.types.jaxb.GeometryMapper;
 
@@ -24,7 +23,7 @@ import org.skyve.impl.domain.types.jaxb.GeometryMapper;
  */
 @XmlType
 @XmlRootElement
-public abstract class Office extends AbstractPersistentBean {
+public abstract class Office extends AbstractLastChanged {
 	/**
 	 * For Serialization
 	 * @hidden
@@ -32,9 +31,11 @@ public abstract class Office extends AbstractPersistentBean {
 	private static final long serialVersionUID = 1L;
 
 	/** @hidden */
+	@SuppressWarnings("hiding")
 	public static final String MODULE_NAME = "orgManager";
 
 	/** @hidden */
+	@SuppressWarnings("hiding")
 	public static final String DOCUMENT_NAME = "Office";
 
 	/** @hidden */

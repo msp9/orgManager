@@ -3,6 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="edit"
 	title="Office"
 	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd">
+	<component name="_lastChangedDisplay"
+		document="AbstractLastChanged"></component>
 	<form responsiveWidth="12" percentageWidth="60" border="true">
 		<column percentageWidth="30" responsiveWidth="4" />
 		<column />

@@ -4,9 +4,11 @@ import org.skyve.domain.messages.Message;
 import org.skyve.domain.messages.ValidationException;
 import org.skyve.metadata.model.document.Bizlet;
 
+import modules.orgManager.AbstractLastChanged.AbstractLastChangedBizlet;
+import modules.orgManager.domain.AbstractLastChanged;
 import modules.orgManager.domain.Office;
 
-public class OfficeBizlet extends Bizlet<OfficeExtension> {
+public class OfficeBizlet extends AbstractLastChangedBizlet<OfficeExtension> {
 
 	@Override
 	public void validate(OfficeExtension bean, ValidationException e) throws Exception {

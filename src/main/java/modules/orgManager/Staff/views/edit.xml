@@ -4,6 +4,8 @@
 	title="Staff"
 	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd"
 	xmlns:c="http://www.skyve.org/xml/common">
+	<component name="_lastChangedDisplay"
+		document="AbstractLastChanged"></component>
 	<hbox border="true">
 		<form border="true" borderTitle="Staff Details">
 			<column percentageWidth="30" responsiveWidth="4" />

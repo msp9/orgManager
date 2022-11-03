@@ -39,8 +39,5 @@
 		<filterParameter operator="isNull"
 			filterBinding="baseOffice" />
 	</listGrid>
-	<actions>
-		<defaults />
-	</actions>
-	<newParameters />
+
 </view>
