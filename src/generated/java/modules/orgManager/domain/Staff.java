@@ -63,6 +63,9 @@ public abstract class Staff extends AbstractLastChanged {
 	public static final String imagePropertyName = "image";
 
 	/** @hidden */
+	public static final String resumeUploadPropertyName = "resumeUpload";
+
+	/** @hidden */
 	public static final String baseOfficePropertyName = "baseOffice";
 
 	/** @hidden */
@@ -176,6 +179,11 @@ public abstract class Staff extends AbstractLastChanged {
 	 * Image
 	 **/
 	private String image;
+
+	/**
+	 * Resume
+	 **/
+	private String resumeUpload;
 
 	/**
 	 * Office
@@ -331,6 +339,24 @@ public abstract class Staff extends AbstractLastChanged {
 	public void setImage(String image) {
 		preset(imagePropertyName, image);
 		this.image = image;
+	}
+
+	/**
+	 * {@link #resumeUpload} accessor.
+	 * @return	The value.
+	 **/
+	public String getResumeUpload() {
+		return resumeUpload;
+	}
+
+	/**
+	 * {@link #resumeUpload} mutator.
+	 * @param resumeUpload	The new value.
+	 **/
+	@XmlElement
+	public void setResumeUpload(String resumeUpload) {
+		preset(resumeUploadPropertyName, resumeUpload);
+		this.resumeUpload = resumeUpload;
 	}
 
 	/**

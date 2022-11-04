@@ -2,7 +2,7 @@
 <document xmlns="http://www.skyve.org/xml/document"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Staff"
 	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
-	<extends document="AbstractLastChanged"/>
+	<extends document="AbstractLastChanged" />
 	<persistent name="ORG_Staff" />
 	<singularAlias>Staff</singularAlias>
 	<pluralAlias>Staffs</pluralAlias>
@@ -28,6 +28,10 @@
 		<image name="image">
 			<displayName>Image</displayName>
 		</image>
+		<content name="resumeUpload">
+			<displayName>Resume</displayName>
+			<index>textual</index>
+		</content>
 
 		<association name="baseOffice" type="aggregation">
 			<displayName>Office</displayName>
@@ -53,7 +57,9 @@
 			<displayName>Status History</displayName>
 			<documentName>StaffStatusHistory</documentName>
 			<minCardinality>0</minCardinality>
-			<ordering><order sort="descending" by="statusTimestamp"/></ordering>
+			<ordering>
+				<order sort="descending" by="statusTimestamp" />
+			</ordering>
 		</collection>
 
 	</attributes>

@@ -26,6 +26,10 @@
 			<dynamic>false</dynamic>
 			<length>200</length>
 		</text>
+		<memo name="deliverInstructions">
+			<displayName>Delivery Instructions</displayName>
+			<index>textual</index>
+		</memo>
 		<text name="levelUnit">
 			<displayName>Level Unit</displayName>
 			<dynamic>false</dynamic>

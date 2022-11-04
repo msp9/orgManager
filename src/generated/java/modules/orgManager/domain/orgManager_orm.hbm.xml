@@ -24,6 +24,7 @@
 			<property name="streetAddress1" length="200" />
 			<property name="streetAddress2" length="200" />
 			<property name="suburb" length="200" />
+			<property name="deliverInstructions" type="text" />
 			<property name="levelUnit" length="200" />
 			<property name="buildingName" length="200" />
 			<property name="boundary" />
@@ -59,6 +60,7 @@
 			<property name="dateOfBirth" type="DateOnly" />
 			<property name="location" />
 			<property name="image" length="36" />
+			<property name="resumeUpload" length="36" />
 			<many-to-one name="baseOffice" entity-name="orgManagerOffice" column="baseOffice_id" cascade="persist,save-update,refresh,merge" foreign-key="FK_ORG_Staff_baseOffice"/>
 			<property name="status" length="12">
 				<type name="Enum">

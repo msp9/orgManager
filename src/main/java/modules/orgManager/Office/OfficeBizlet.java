@@ -1,5 +1,6 @@
 package modules.orgManager.Office;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,14 +44,20 @@ public class OfficeBizlet extends AbstractLastChangedBizlet<OfficeExtension> {
 	@Override
 	public List<String> complete(String attributeName, String value, OfficeExtension bean) throws Exception {
 		// TODO Auto-generated method stub
-		
+		List<String> valuesToShow = new ArrayList<>();
 		if(bean.suburbPropertyName.equals(attributeName)) {
 			if(bean.getPostcode() != null) {
 				List<SuburbResult> results = service.getSuburbsByPostCode(bean.getPostcode().toString());
-				return results.stream().map(n->n.getName()).collect(Collectors.toList());
+				for(SuburbResult res: results) {
+					if(value==null || res.getName().toLowerCase().startsWith(value.toLowerCase())) {
+						valuesToShow.add(res.getName());
+					}
+				}
+				
+//				return results.stream().filter(s->s.getName().startsWith(value)).map(n->n.getName()).collect(Collectors.toList());
 			}
 		}
-		return super.complete(attributeName, value, bean);
+		return valuesToShow;
 	}
 
 }

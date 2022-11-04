@@ -46,6 +46,11 @@
 				<default binding="phone" />
 			</item>
 		</row>
+			<row>
+				<item>
+					<textArea binding="deliverInstructions"  />
+				</item>
+			</row>
 		<row>
 			<item>
 				<contentImage binding="fileInstructions" />

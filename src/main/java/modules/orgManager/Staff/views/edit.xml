@@ -35,6 +35,11 @@
 					<textField binding="ageInYears" disabled="true" />
 				</item>
 			</row>
+	<row>
+		<item>
+			<contentLink binding="resumeUpload" />
+		</item>
+	</row>
 
 			<row>
 				<item>
