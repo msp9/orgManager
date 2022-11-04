@@ -23,6 +23,7 @@
 			<property name="lastChanged" type="DateTime" />
 			<property name="streetAddress1" length="200" />
 			<property name="streetAddress2" length="200" />
+			<property name="suburb" length="200" />
 			<property name="levelUnit" length="200" />
 			<property name="buildingName" length="200" />
 			<property name="boundary" />
@@ -74,6 +75,23 @@
 			<filter name="orgManagerStaffUserIdFilter" condition="bizUserId=:userIdParam"/>
 		</class>
 
+	<class name="modules.orgManager.domain.Search" table="ORG_Search" entity-name="orgManagerSearch">
+		<id name="bizId" length="36" />
+		<version name="bizVersion" unsaved-value="null" />
+		<property name="bizLock" type="OptimisticLock" length="271" not-null="true" />
+		<property name="bizKey" length="1024" not-null="true" />
+		<property name="bizCustomer" length="50" not-null="true" />
+		<property name="bizFlagComment" length="1024" />
+		<property name="bizDataGroupId" length="36" />
+		<property name="bizUserId" length="36" not-null="true" />
+		<property name="suburb" length="200" />
+		<many-to-one name="listOffice" entity-name="orgManagerOffice" column="listOffice_id" cascade="persist,save-update,refresh,merge" foreign-key="FK_ORG_Search_listOffice"/>
+		<filter name="orgManagerSearchNoneFilter" condition="1=0"/>
+		<filter name="orgManagerSearchCustomerFilter" condition="bizCustomer=:customerParam"/>
+		<filter name="orgManagerSearchDataGroupIdFilter" condition="bizDataGroupId=:dataGroupIdParam"/>
+		<filter name="orgManagerSearchUserIdFilter" condition="bizUserId=:userIdParam"/>
+	</class>
+
 	<class name="modules.orgManager.domain.StaffStatusHistory" table="ORG_StaffStatusHistory" entity-name="orgManagerStaffStatusHistory">
 		<id name="bizId" length="36" />
 		<version name="bizVersion" unsaved-value="null" />
@@ -114,6 +132,16 @@
 		<filter-param name="dataGroupIdParam" type="string"/>
 	</filter-def>
 	<filter-def name="orgManagerStaffUserIdFilter">
+		<filter-param name="userIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerSearchNoneFilter" />
+	<filter-def name="orgManagerSearchCustomerFilter">
+		<filter-param name="customerParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerSearchDataGroupIdFilter">
+		<filter-param name="dataGroupIdParam" type="string"/>
+	</filter-def>
+	<filter-def name="orgManagerSearchUserIdFilter">
 		<filter-param name="userIdParam" type="string"/>
 	</filter-def>
 	<filter-def name="orgManagerStaffStatusHistoryNoneFilter" />

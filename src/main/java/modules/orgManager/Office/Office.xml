@@ -2,13 +2,13 @@
 <document xmlns="http://www.skyve.org/xml/document"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Office"
 	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
-	<extends document="AbstractLastChanged"/>
+	<extends document="AbstractLastChanged" />
 	<persistent name="ORG_Office" />
-	
+
 	<singularAlias>Office</singularAlias>
 	<pluralAlias>Offices</pluralAlias>
 	<iconStyleClass>fa fa-building</iconStyleClass>
-	
+
 	<bizKey expression="Office - {buildingName}" />
 	<attributes>
 		<text required="true" name="streetAddress1">
@@ -18,6 +18,11 @@
 		</text>
 		<text required="true" name="streetAddress2">
 			<displayName>Street Address 2</displayName>
+			<dynamic>false</dynamic>
+			<length>200</length>
+		</text>
+		<text required="true" name="suburb">
+			<displayName>Suburb</displayName>
 			<dynamic>false</dynamic>
 			<length>200</length>
 		</text>
@@ -65,11 +70,12 @@
 			<documentName>Staff</documentName>
 			<referenceName>baseOffice</referenceName>
 		</inverseMany>
-		<collection type="aggregation" name="listStaffNeverInOffice">
+		<collection type="aggregation"
+			name="listStaffNeverInOffice">
 			<displayName>Staff Never In Office</displayName>
 			<documentName>Staff</documentName>
 			<minCardinality>0</minCardinality>
-	
+
 		</collection>
 	</attributes>
 </document>

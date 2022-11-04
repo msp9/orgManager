@@ -18,6 +18,7 @@
 				<default binding="streetAddress2" />
 			</item>
 		</row>
+
 		<row>
 			<item>
 				<default binding="levelUnit" />
@@ -30,7 +31,14 @@
 		</row>
 		<row>
 			<item>
-				<default binding="postcode" />
+				<textField binding="postcode" >
+				<onChangedHandlers><rerender clientValidation="false"></rerender></onChangedHandlers>
+				</textField>
+			</item>
+		</row>
+		<row>
+			<item>
+				<textField binding="suburb" complete="suggest"/>
 			</item>
 		</row>
 		<row>
@@ -51,7 +59,8 @@
 
 		<row>
 			<item>
-				<textField binding="totalNoOfStaffInOffice" disabled="true" />
+				<textField binding="totalNoOfStaffInOffice"
+					disabled="true" />
 			</item>
 		</row>
 
@@ -77,7 +86,7 @@
 		<boundColumn binding="code" />
 		<boundColumn binding="name" />
 	</dataGrid>
-		<dataGrid binding="listStaffNeverInOffice">
+	<dataGrid binding="listStaffNeverInOffice">
 		<boundColumn binding="code" />
 		<boundColumn binding="name" />
 	</dataGrid>

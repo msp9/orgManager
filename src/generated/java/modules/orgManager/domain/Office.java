@@ -45,6 +45,9 @@ public abstract class Office extends AbstractLastChanged {
 	public static final String streetAddress2PropertyName = "streetAddress2";
 
 	/** @hidden */
+	public static final String suburbPropertyName = "suburb";
+
+	/** @hidden */
 	public static final String levelUnitPropertyName = "levelUnit";
 
 	/** @hidden */
@@ -83,6 +86,11 @@ public abstract class Office extends AbstractLastChanged {
 	 * Street Address 2
 	 **/
 	private String streetAddress2;
+
+	/**
+	 * Suburb
+	 **/
+	private String suburb;
 
 	/**
 	 * Level Unit
@@ -213,6 +221,24 @@ public abstract class Office extends AbstractLastChanged {
 	public void setStreetAddress2(String streetAddress2) {
 		preset(streetAddress2PropertyName, streetAddress2);
 		this.streetAddress2 = streetAddress2;
+	}
+
+	/**
+	 * {@link #suburb} accessor.
+	 * @return	The value.
+	 **/
+	public String getSuburb() {
+		return suburb;
+	}
+
+	/**
+	 * {@link #suburb} mutator.
+	 * @param suburb	The new value.
+	 **/
+	@XmlElement
+	public void setSuburb(String suburb) {
+		preset(suburbPropertyName, suburb);
+		this.suburb = suburb;
 	}
 
 	/**

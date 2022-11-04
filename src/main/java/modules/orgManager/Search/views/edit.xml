@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view xmlns="http://www.skyve.org/xml/view"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="edit"
+	title="Search"
+	xsi:schemaLocation="http://www.skyve.org/xml/view ../../../../schemas/view.xsd">
+
+	<form responsiveWidth="12" percentageWidth="60" border="true">
+		<column percentageWidth="30" responsiveWidth="4" />
+		<column />
+		<row>
+			<item>
+				<combo binding="suburb">
+					<onChangedHandlers>
+						<rerender></rerender>
+					</onChangedHandlers>
+				</combo>
+			</item>
+		</row>
+
+		<row>
+			<item>
+				<lookupDescription binding="listOffice"
+					descriptionBinding="buildingName">
+					<onPickedHandlers>
+						<rerender></rerender>
+					</onPickedHandlers>
+					<filterParameter operator="equal"
+						filterBinding="suburb" valueBinding="suburb" />
+
+				</lookupDescription>
+
+			</item>
+		</row>
+
+	</form>
+	<listGrid continueConversation="true"
+		query="qStaffSearchScreen">
+		<filterParameter operator="equal"
+			filterBinding="baseOffice" valueBinding="listOffice" />
+		<filterParameter operator="equal"
+			filterBinding="baseOffice.suburb" valueBinding="suburb" />
+	</listGrid>
+
+	<newParameters />
+</view>

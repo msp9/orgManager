@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.skyve.org/xml/document"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	name="SuburbResult"
+	xsi:schemaLocation="http://www.skyve.org/xml/document ../../../schemas/document.xsd">
+	<singularAlias>SuburbResult</singularAlias>
+	<pluralAlias>suburbresults</pluralAlias>
+	<bizKey expression="SuburbResult" />
+	<attributes>
+		<text name="name">
+			<displayName>Name</displayName>
+			<dynamic>false</dynamic>
+			<length>100</length>
+		</text>
+		<text name="state">
+			<displayName>State</displayName>
+			<dynamic>false</dynamic>
+			<length>100</length>
+		</text>
+		<text name="stateAbbreviation">
+			<displayName>State Abbreviation</displayName>
+			<dynamic>false</dynamic>
+			<length>100</length>
+		</text>
+
+	</attributes>
+</document>

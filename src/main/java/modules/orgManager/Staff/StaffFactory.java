@@ -16,7 +16,7 @@ import modules.admin.domain.Group;
 import modules.admin.domain.User;
 import modules.orgManager.domain.Staff;
 
-@SkyveFactory(value = { @DataMap(attributeName = Staff.namePropertyName, fileName = "personName.txt")
+@SkyveFactory(testAction=false,value = { @DataMap(attributeName = Staff.namePropertyName, fileName = "personName.txt")
 
 })
 public class StaffFactory {

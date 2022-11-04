@@ -2,13 +2,17 @@
 <module xmlns="http://www.skyve.org/xml/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" title="Org Manager" prototype="true" name="orgManager" xsi:schemaLocation="http://www.skyve.org/xml/module ../../schemas/module.xsd">
     <homeRef>edit</homeRef>
     <homeDocument>OrganisationDashboard</homeDocument>
-    <jobs><job displayName="ReHome Staff" className="modules.orgManager.ReHomeStaffJob" name="reHomeStaff"/></jobs>
+    <jobs>
+        <job displayName="ReHome Staff" className="modules.orgManager.ReHomeStaffJob" name="reHomeStaff"/>
+    </jobs>
     <documents>
         <document ref="AbstractLastChanged"/>
         <document ref="Office"/>
         <document ref="OrganisationDashboard"/>
+        <document ref="Search"/>
         <document ref="Staff" defaultQueryName="qStaff"/>
         <document ref="StaffStatusHistory"/>
+        <document ref="SuburbResult"/>
     </documents>
     <roles>
         <role name="Viewer">
@@ -16,6 +20,8 @@
             <privileges>
                 <document name="Office" permission="_R__C"/>
                 <document name="Staff" permission="_R__C"/>
+                <document name="Search" permission="_R__C"/>
+                <document name="SuburbResult" permission="_R__C"/>
                 <document name="StaffStatusHistory" permission="_R__C"/>
                 <document name="OrganisationDashboard" permission="_R__C"/>
             </privileges>
@@ -25,10 +31,12 @@
             <description><![CDATA[Enough privileges to create and edit Org Manager documents.]]></description>
             <privileges>
                 <document name="Office" permission="CRUDC"/>
+                <document name="Search" permission="_R__U"/>
                 <document name="Staff" permission="CRUDC">
                     <action name="SendHome"/>
                 </document>
                 <document name="StaffStatusHistory" permission="_R__C"/>
+                <document name="SuburbResult" permission="_R__C"/>
                 <document name="OrganisationDashboard" permission="_R__C"/>
             </privileges>
             <accesses/>
@@ -47,6 +55,11 @@
             <role name="Maintainer"/>
             <role name="Viewer"/>
         </edit>
+        <edit document="Search" name="Search">
+            <role name="Maintainer"/>
+            <role name="Viewer"/>
+        </edit>
+        
     </menu>
     <queries>
         <query documentName="Staff" name="qStaff">
@@ -68,6 +81,18 @@
                 <column binding="name"/>
                 <column binding="dateOfBirth" pixelWidth="100"/>
                 <column binding="status"/>
+            </columns>
+        </query>
+        
+           <query documentName="Staff" name="qStaffSearchScreen">
+            <description><![CDATA[All Staffs]]></description>
+            <columns>
+                <content display="thumbnail" pixelHeight="64" binding="image" pixelWidth="128"/>
+                <column binding="code" sortOrder="ascending"/>
+                <column binding="name"/>
+                <column binding="dateOfBirth" pixelWidth="100"/>
+                <column binding="status"/>
+                <column binding="baseOffice.buildingName"/>
             </columns>
         </query>
     </queries>
